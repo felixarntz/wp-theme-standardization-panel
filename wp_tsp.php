@@ -61,14 +61,18 @@ add_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks', array(
 function yourtheme_do_hook( $hook_name, $before_or_after )
 {
 	$support = get_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks' );
-	if( is_array( $support ) && in_array( $hook_name, $support ) )
+	if( is_array( $support ) && isset( $support[0] ) )
 	{
-		if( $before_or_after != 'after' )
+		$support = $support[0];
+		if( is_array( $support ) && in_array( $hook_name, $support ) )
 		{
-			$before_or_after = 'before';
+			if( $before_or_after != 'after' )
+			{
+				$before_or_after = 'before';
+			}
+			do_action( WP_THEME_HOOK_SLUG . '_' . $before_or_after . '_' . $hook_name );
+			return true;
 		}
-		do_action( WP_THEME_HOOK_SLUG . '_' . $before_or_after . '_' . $hook_name );
-		return true;
 	}
 	return false;
 }
