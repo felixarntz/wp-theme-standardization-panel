@@ -8,7 +8,7 @@
  * where it needs to be inserted, without using filters (which should actually only be used for modifying existing
  * content) or (even worse) output buffers.
  *
- * The guidelines can be found at https://github.com/felixarntz/wp-theme-standardization-panel.
+ * The guidelines can be found at https://github.com/felixarntz/wp-theme-standardization-panel
  *
  * This file here is a reference file. You may include it and modify it to your needs, however it is not necessary to
  * use it as long as you stick to the guidelines. This file by default includes support for all 10 basic hooks.
@@ -17,7 +17,7 @@
  * @package WPTSP
  * @version 1.0
  * @author  Felix Arntz <felix-arntz@leaves-and-love.net>
- * @link	https://github.com/felixarntz/wp-theme-standardization-panel
+ * @link    https://github.com/felixarntz/wp-theme-standardization-panel
  */
 
 /**
@@ -27,7 +27,7 @@
  */
 if( !defined( 'WP_THEME_HOOK_SLUG' ) )
 {
-	define( 'WP_THEME_HOOK_SLUG', 'yourtheme' );
+  define( 'WP_THEME_HOOK_SLUG', 'yourtheme' );
 }
 
 /**
@@ -37,16 +37,16 @@ if( !defined( 'WP_THEME_HOOK_SLUG' ) )
  * Editing the array allows to adjust theme support.
  */
 add_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks', array(
-	'header',
-	'main',
-	'loop',
-	'article',
-	'article_header',
-	'article_content',
-	'article_footer',
-	'comments_section',
-	'sidebar',
-	'footer',
+  'header',
+  'main',
+  'loop',
+  'article',
+  'article_header',
+  'article_content',
+  'article_footer',
+  'comments_section',
+  'sidebar',
+  'footer',
 ) );
 
 /**
@@ -60,19 +60,19 @@ add_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks', array(
  */
 function yourtheme_do_hook( $hook_name, $before_or_after )
 {
-	$support = get_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks' );
-	if( is_array( $support ) && isset( $support[0] ) )
-	{
-		$support = $support[0];
-		if( is_array( $support ) && in_array( $hook_name, $support ) )
-		{
-			if( $before_or_after != 'after' )
-			{
-				$before_or_after = 'before';
-			}
-			do_action( WP_THEME_HOOK_SLUG . '_' . $before_or_after . '_' . $hook_name );
-			return true;
-		}
-	}
-	return false;
+  $support = get_theme_support( WP_THEME_HOOK_SLUG . '_theme_hooks' );
+  if( is_array( $support ) && isset( $support[0] ) )
+  {
+    $support = $support[0];
+    if( is_array( $support ) && in_array( $hook_name, $support ) )
+    {
+      if( $before_or_after != 'after' )
+      {
+        $before_or_after = 'before';
+      }
+      do_action( WP_THEME_HOOK_SLUG . '_' . $before_or_after . '_' . $hook_name );
+      return true;
+    }
+  }
+  return false;
 }
